@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Major vs. Unemployment</title>
+
+		<!-- Libraries -->
+		<script src="https://code.jquery.com/jquery.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+
+		<!-- Custom files -->
+		<link rel="stylesheet" href="css/main.css"/>
+
+		<!-- your script file -->
+		<script src="js/main.js"></script>
+	</head>
+	<body class="container">
+		<div class="heading">
+			<h1>Building a Data Exploration Tool</h1>
+			<p>This is an visualization assignment that focuses on creating reusable code with d3.js. 
+			   There are two controls for which the user can change what is being visualized. Data was taken from
+			   <a href="https://github.com/fivethirtyeight/data/blob/master/college-majors/all-ages.csv"> here.</a>
+			</p>
+		</div>
+		<div>
+			<h2>Major vs Unemployment Rate</h2>
+		</div>
+		<div class="labels">
+			Select a category of majors:
+			<select class="major">
+				<option>Agriculture &amp; Natural Resources</option>
+				<option>Arts</option>
+				<option>Biology &amp; Life Science</option>
+				<option>Business</option>
+				<option>Communications &amp; Journalism</option>
+				<option>Computers &amp; Mathematics</option>
+				<option>Education</option>
+				<option>Engineering</option>
+				<option>Health</option>
+				<option>Humanities &amp; Liberal Arts</option>
+				<option>Industrial Arts &amp; Consumer Services</option>
+				<option>Interdisciplinary</option>
+				<option>Law &amp; Public Policy</option>
+				<option>Physical Sciences</option>
+				<option>Psychology &amp; Social Work</option>
+				<option>Social Science</option>
+			</select>
+			<select class="unemployment-rate">
+				<option label="Rate > 0%"> 0.00 </option>
+				<option label="Rate > 2%"> 0.02 </option>
+				<option label="Rate > 4%"> 0.04 </option>
+				<option label="Rate > 6%"> 0.06 </option>
+			</select>
+			<span class="unemployment-rate"> Select the unemployment rate: </span>
+		</div>
+
+		<div id="viz"></div>
+
+		<div> 
+			<h2> Rational for my design decisions </h2>
+			<p>
+				I chose to visually encode the rate of unemployment with the height of each bar graph because the the perceptual elementary task of perceiving length is a strong and accurate way to encode your data. The reason why bar graphs are popular are because they are simple to read and use a great elementary perceptual task, thus why I chose to express my data with bar graphs. I used a simple arbitrary soft teal color as the color of the bar graph.
+			</p>
+			<p>
+				I allowed the user to control the categories of majors and the rate of unemployment. 
+				For the first variable, allowing the user to see the differences in unemployment rates between similar majors can help them distinguish the current trends in society. For example, when I looked at the Engineering majors, I was surprised to see Materials Science as one of the engineering majors with the lowest unemployment rate (fun fact: I was previously a Materials Science major before switching to Informatics). Some example questions that can be solved by this first control can be like "How do the Arts majors compare between each other?" or "Which education major should I pursue for a better chance of being employed?"
+				The second variable that I allowed the user to change is displaying how high the unemployment rates are. I chose this because I wanted to separate more of the data on the screen into quantitative ranges. I chose >0.00 as the default value to display all unemployment rates. After that, I allowed the user to choose to display rates that are greater than 2%, 4%, and then 6%. Based on the data, I deemed that having a higher unemployment rate than 6% is on the higher end. A sample question that can be answered from this changing variable can be "How many engineering majors have a unemployment rate greater than 6%?"
+			</p>
+		</div>
+
+	</body>
+</html>
