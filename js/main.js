@@ -45,43 +45,44 @@ $(function() {
 				.attr('height', height)
 				.attr('width', width);
 
-		// Append an xaxis label to your SVG, specifying the 'transform' attribute to position it
+		// Append an xaxis label to SVG, specifying the 'transform' attribute to position it
 		var xAxisLabel = svg.append('g')
-												.attr('transform', 'translate(' + margin.left + ',' + (height + margin.top) + ')')
-												.attr('class', 'axis')
+							.attr('transform', 'translate(' + margin.left + ',' + (height + margin.top) + ')')
+							.attr('class', 'axis')
 
 		// Append a yaxis label to your SVG, specifying the 'transform' attribute to position it
 		var yAxisLabel = svg.append('g')
-										.attr('class', 'axis')
-										.attr('transform', 'translate(' + margin.left + ',' + (margin.top) + ')')
+							.attr('class', 'axis')
+							.attr('transform', 'translate(' + margin.left + ',' + (margin.top) + ')')
 
 		// Append text to label the y axis
 		var xAxisText = svg.append('text')
-											 .attr('transform', 'translate(' + (margin.left + width/2) + ',' + (height + margin.top + 80) + ')')
-											 .attr('class', 'majors')
+						 .attr('transform', 'translate(' + (margin.left + width/2) + ',' + (height + margin.top + 80) + ')')
+						 .attr('class', 'majors')
 
 		// Append text to label the y axis 
 		var yAxisText = svg.append('text')
-											 .attr('transform', 'translate(' + (margin.left - 40) + ',' + (margin.top + height/2) + ') rotate(-90)')
-											 .attr('class', 'majors')
+						 .attr('transform', 'translate(' + (margin.left - 40) + ',' + (margin.top + height/2) + ') rotate(-90)')
+						 .attr('class', 'majors')
 
-		// Write a function for setting scales.
+		// function that sets the scales given the data
 		var setScales = function(data) {
-			// Get the unique values of states for the domain of your x scale
+			// Gets the unique values of majors for the domain of your x scale
 			var major = data.map(function(d) {return d.Major});
 
-			// Define an ordinal xScale using rangeBands
+			// Defines an ordinal xScale using rangeBands
 			xScale  = d3.scale.ordinal().rangeBands([0, width], .2).domain(major);
 
-			// Get min/max values of the percent data
+			// Get min/max values of the percent data. I multiplied unemployment rate
+			// by 100 so that it's easier to read for the user (0.02 -> 2%)
 			var yMin =d3.min(data, function(d){return +d.Unemployment_rate * 100});
 			var yMax =d3.max(data, function(d){return +d.Unemployment_rate * 100});
 
-			// Define the yScale, draw from top to bottom
+			// Defines the yScale, draw from top to bottom
 			yScale = d3.scale.linear().range([height, 0]).domain([0, yMax]);
 		}
 
-		// Function for setting axes
+		// function fro setting up the axes
 		var setAxes = function() {
 			// Define x axis using d3.svg.axis(), assigning the scale as the xScale
 			var xAxis = d3.svg.axis()
@@ -115,8 +116,6 @@ $(function() {
 			currentData = allData.filter(function(d) {
 				return d.Major_category == majors && d.Unemployment_rate > percent;
 			})
-			// Sort the data alphabetically
-			// Hint: http://stackoverflow.com/questions/6712034/sort-array-by-firstname-alphabetically-in-javascript
 			.sort(function(a,b){
 				if (a.Major < b.Major) {
 					return -1;
@@ -156,6 +155,7 @@ $(function() {
 				.duration(1500)
 				.delay(function(d,i){return i*50})
 				.attr('x', function(d){return xScale(d.Major)})
+				// I multiplied unemployment rate by 100 so that it's easier to read for the user (0.02 -> 2%)
 				.attr('y', function(d){return yScale(d.Unemployment_rate * 100)})
 				.attr('height', function(d) {return height - yScale(d.Unemployment_rate * 100)})
 				.attr('width', xScale.rangeBand())
@@ -179,7 +179,7 @@ $(function() {
 			console.log(percent);
 		});
 
-		// Filter data to the current settings then draw
+		// Filter data to the current data then draw
 		filterData();
 		draw(currentData);
 
