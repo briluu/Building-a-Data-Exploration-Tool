@@ -9,8 +9,8 @@ Covers scales, axes, filtering data, and drawing data.
 
 I used this link:
 http://www.d3noob.org/2013/01/how-to-rotate-text-labels-for-x-axis-of.html
-to rotate the text labels on the x-axis so that they did not overlap when
-too many were on the graph.
+to rotate the text labels on the x-axis so that they did not overlap when 
+there were too many labels on the graph.
 
 
 
